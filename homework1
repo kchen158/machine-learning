@@ -1,0 +1,71 @@
+clear
+clc
+%the first problem
+
+% training_set=randi([0,999],1,10);
+% positive_feature=find(training_set>100 & training_set<600);
+% training_positive=training_set(positive_feature);
+% training_interval_max=max(training_positive);
+% training_interval_min=min(training_positive);
+% training_interval=[training_interval_min,training_interval_max];
+% postive_number=length(positive_feature);
+% training_number=length(training_set);
+% training_feature=zeros(1,training_number);
+% for i=1:postive_number
+%     training_feature(positive_feature(i))=1; %positive means 1
+% end
+% test_set=randi([0,999],1,50000);
+% test_positive=find((test_set>training_interval_min) & (test_set<training_interval_max));
+% test_positive_number=length(test_positive);
+% true_positive_number=length(find(test_set>100 & test_set<600));
+% error_rate=(true_positive_number-test_positive_number)/50000;
+% failure=1-length(find(error_rate>0.05))/  %the failure propability
+% error_analysis=((600-training_interval_max)+(training_interval_min-100))/1000
+
+
+
+%the second problem
+% for m=1:10
+% for j=1:10                               %When the training sample size is 10
+% training_set(j)=min(randi([0,999],1,5));
+% end
+% for j=1:3000                             %When the test sample size is 3000
+% test_set(j)=min(randi([0,999],1,5));
+% end
+% positive_feature=find(training_set>100 & training_set<600);
+% training_positive=training_set(positive_feature);
+% training_interval_max=max(training_positive);
+% training_interval_min=min(training_positive);
+% test_positive_feature=find((test_set>training_interval_min) & (test_set<training_interval_max));
+% test_positive=test_set(test_positive_feature);
+% test_interval_max=max(test_positive);
+% test_interval_min=min(test_positive);
+% error(m)=((training_interval_max-test_interval_max)+(test_interval_min-training_interval_min))/1000;
+% end
+% error_rate=sum(error)/10;
+
+
+% the third problem
+for m=1:13000
+training_set=randi([0,999],1,100);
+positive_feature=find(training_set>100 & training_set<600);
+training_positive=training_set(positive_feature);
+training_interval_max=max(training_positive);
+training_interval_min=min(training_positive);
+training_interval=[training_interval_min,training_interval_max];
+postive_number=length(positive_feature);
+training_number=length(training_set);
+training_feature=zeros(1,training_number);
+for i=1:postive_number
+    training_feature(positive_feature(i))=1; %positive means 1
+end
+for j=1:50000                             %When the test sample size is 3000
+    test_set(j)=min(randi([0,999],1,5));
+end
+test_positive=find((test_set>training_interval_min) & (test_set<training_interval_max));
+test_positive_number=length(test_positive);
+true_positive_number=length(find(test_set>100 & test_set<600));
+error_rate(m)=(true_positive_number-test_positive_number)/50000;
+end 
+sum(error_rate)/m
+success=1-length(find(error_rate>0.05))/m
